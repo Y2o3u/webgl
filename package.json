@@ -1,0 +1,17 @@
+{
+	"name": "webgl",
+	"version": "0.0.1",
+	"description": "learn webgl",
+	"main": "index.js",
+	"repository": "git@github.com:Y2o3u/webgl.git",
+	"author": "尤耀 <youyao.ktwapfb2@bytedance.com>",
+	"license": "MIT",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"vite": "^4.5.0"
+	}
+}
