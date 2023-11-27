@@ -1,4 +1,4 @@
-import { gl } from "./util";
+import { gl } from './util';
 
 const vertextShaderSource = `
     attribute vec4 a_position;
@@ -16,55 +16,47 @@ const fragmentShaderSource = `
 
 /** 创建shader对象 */
 function createShader(gl: WebGLRenderingContext, type: number, source: string) {
-	// 创建shader对象
-	let shader = gl.createShader(type);
-	// 传入源码
-	gl.shaderSource(shader, source);
-	// 编译shader
-	gl.compileShader(shader);
-	// 判断shader是否编译成功
-	let success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
-	if (success) {
-		return shader;
-	}
-	console.log(gl.getShaderInfoLog(shader));
-	gl.deleteShader(shader);
+    // 创建shader对象
+    let shader = gl.createShader(type);
+    // 传入源码
+    gl.shaderSource(shader, source);
+    // 编译shader
+    gl.compileShader(shader);
+    // 判断shader是否编译成功
+    let success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+    if (success) {
+        return shader;
+    }
+    console.log(gl.getShaderInfoLog(shader));
+    gl.deleteShader(shader);
 }
 
 /** 创建propgram对象 */
-function createProgram(
-	gl: WebGLRenderingContext,
-	vertexShader: WebGLShader,
-	fragmentShader: WebGLShader
-) {
-	// 创建propgram对象
-	let program = gl.createProgram();
-	// 往program中传入shader对象
-	gl.attachShader(program, vertexShader);
-	gl.attachShader(program, fragmentShader);
+function createProgram(gl: WebGLRenderingContext, vertexShader: WebGLShader, fragmentShader: WebGLShader) {
+    // 创建propgram对象
+    let program = gl.createProgram();
+    // 往program中传入shader对象
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
 
-	// 链接program
-	gl.linkProgram(program);
-	// 判断program是否链接成功
-	let success = gl.getProgramParameter(program, gl.LINK_STATUS);
-	if (success) {
-		return program;
-	}
+    // 链接program
+    gl.linkProgram(program);
+    // 判断program是否链接成功
+    let success = gl.getProgramParameter(program, gl.LINK_STATUS);
+    if (success) {
+        return program;
+    }
 
-	console.log(gl.getProgramInfoLog(program));
-	gl.deleteProgram(program);
+    console.log(gl.getProgramInfoLog(program));
+    gl.deleteProgram(program);
 }
 
 /** 初始化webgl */
 function initWebgl() {
-	let vertexShader = createShader(gl, gl.VERTEX_SHADER, vertextShaderSource);
-	let fragmentShader = createShader(
-		gl,
-		gl.FRAGMENT_SHADER,
-		fragmentShaderSource
-	);
-	let program = createProgram(gl, vertexShader, fragmentShader);
-	return program;
+    let vertexShader = createShader(gl, gl.VERTEX_SHADER, vertextShaderSource);
+    let fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+    let program = createProgram(gl, vertexShader, fragmentShader);
+    return program;
 }
 
 // 设置清除颜色
@@ -77,7 +69,7 @@ const program = initWebgl();
 // 告诉webgl使用该程序
 gl.useProgram(program);
 // 获取shader中的a_position的地址
-const a_position = gl.getAttribLocation(program, "a_position");
+const a_position = gl.getAttribLocation(program, 'a_position');
 // 填充顶点数据
 // gl.vertexAttrib3f(a_position, 0.0, 0.0, 0.0);
 
@@ -96,6 +88,5 @@ gl.enableVertexAttribArray(a_position);
 
 // 矩型
 gl.drawArrays(gl.LINE_LOOP, 0, 4);
-
 // 三角形
 gl.drawArrays(gl.TRIANGLES, 1, 3);
